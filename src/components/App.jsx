@@ -63,8 +63,8 @@ const Questions = () => (
 
             <div>
               {question.choices.map(choice => {
-                return <div className="inputSelection">
-                  <input className="inputRadio" key={choice.id} type="hidden" value={choice.id} />
+                return <div className="inputSelection" key={choice.id}>
+                  <input className="inputRadio" type="hidden" value={choice.id} />
                   <div className="inputDescriptionContainer">
                     <div className="questionLetter"><span className="letter">{choice.id[choice.id.length - 1].toUpperCase()}</span></div>
                     <label className="inputDescriptionText">{choice.text}</label>

@@ -27,7 +27,6 @@ $error-color: rgb(237, 84, 84);
   width: 41%;
   border-radius: 6px;
   border: 1px solid rgb(223, 219, 219);
-  box-shadow: $box-shadow;
   animation: whiteCardFadeIn 1s;
   color: $text-black;
   font-weight: 600;
@@ -44,9 +43,9 @@ $error-color: rgb(237, 84, 84);
 .questionContainer::before,
 .questionContainer::after {
   /* Add shadow to distinguish sheets from one another */
-  // box-shadow: 2px 1px 0px rgb(208, 206, 206);
-  // padding: 1px;
-  box-shadow: $box-shadow;
+  // box-shadow: $box-shadow;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 6px;
 }
 
 .questionContainer::before,
@@ -55,8 +54,8 @@ $error-color: rgb(237, 84, 84);
   justify-content: center;
   content: "";
   position: absolute;
-  width: 43%;
-  height: 80%;
+  width: 43.2%;
+  height: 69%;
   background-color: $background-color;
   margin-left: 28.5%;
   margin-top: 39.5px;
@@ -64,15 +63,15 @@ $error-color: rgb(237, 84, 84);
 
 /* Second sheet of paper */
 .questionContainer::before {
-  left: 7px;
-  top: 5px;
+  left: 10px;
+  top: 8px;
   z-index: -1;
 }
 
 /* Third sheet of paper */
 .questionContainer::after {
-  left: 12px;
-  top: 10px;
+  left: 20px;
+  top: 19px;
   z-index: -2;
 }
 
@@ -172,6 +171,8 @@ $error-color: rgb(237, 84, 84);
   float: right;
   font-size: 16px;
   cursor: pointer;
+  margin-left: 40px;
+  margin-top: -26px;
 }
 
 .inputRadio {
