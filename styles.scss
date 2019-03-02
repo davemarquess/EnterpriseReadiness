@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Oswald|Roboto|Raleway|Cabin|Nobile|Electrolize|Exo+2|Yantramanav|Ubunto+Mono|Quantico|Anton');
+
+$heading-size: 84px;
+$bg-color: rgb(242, 242, 242);
+$background-color: rgb(254, 254, 254);
+$box-shadow: 0px 1px 1px 1px $bg-color;
+$text-black: rgb(48, 48, 48);
+$beforeNavHover: rgba(255, 255, 255, 0.7);
+$afterNavHover: rgba(237, 237, 237, 0.9);
+$error-color: rgb(237, 84, 84);
+
+@keyframes onHoverNavItem {
+  0%   { color: $beforeNavHover; }
+  100% { color: white; }
+}
+
+#root {
+  margin: auto;
+}
+.questionContainer {
+  display: flex;
+  justify-content: center;
+  background-color: $background-color;
+  padding: 20px 20px 30px 20px;
+  margin: 30px 20px 20px 20px;
+  font-family: sans-serif;
+  width: 41%;
+  border-radius: 6px;
+  border: 1px solid rgb(223, 219, 219);
+  box-shadow: $box-shadow;
+  animation: whiteCardFadeIn 1s;
+  color: $text-black;
+  font-weight: 600;
+  font-size: 20px;
+  flex-wrap: wrap;
+}
+
+.questionContainer:hover {
+  transition: 0.3s;
+  background-color: lighten($background-color, 1%);
+}
+
+.questionContainer,
+.questionContainer::before,
+.questionContainer::after {
+  /* Add shadow to distinguish sheets from one another */
+  // box-shadow: 2px 1px 0px rgb(208, 206, 206);
+  // padding: 1px;
+  box-shadow: $box-shadow;
+}
+
+.questionContainer::before,
+.questionContainer::after {
+  display: flex;
+  justify-content: center;
+  content: "";
+  position: absolute;
+  width: 43%;
+  height: 80%;
+  background-color: $background-color;
+  margin-left: 28.5%;
+  margin-top: 39.5px;
+}
+
+/* Second sheet of paper */
+.questionContainer::before {
+  left: 7px;
+  top: 5px;
+  z-index: -1;
+}
+
+/* Third sheet of paper */
+.questionContainer::after {
+  left: 12px;
+  top: 10px;
+  z-index: -2;
+}
+
+
+.pageHeading {
+  display: flex;
+  justify-content: center;
+  
+  padding: 10px 10px 10px 10px;
+  margin: 30px 20px 20px 20px;
+  font-family: "Montserrat";
+  width: 31%;
+  border-radius: 4px;
+  
+  animation: whiteCardFadeIn 1s;
+  color: $text-black;
+  font-size: 44px;
+  
+}
+
+.formText {
+  display: block;
+  font-size: 17px;
+  margin: 0 0 -5px 0;
+  font-weight: 400;
+  width: 80%;
+}
+
+.inputSelection {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  border: 1px solid rgb(223, 219, 219);
+  border-radius: 6px;
+  padding: 14px 10px 5px 10px;
+  cursor: pointer;
+}
+
+.inputSelection:hover {
+  transition: 0.3s;
+  background-color: rgba(195, 242, 255, 0.7);
+  border-color: rgba(148, 184, 194, 0.7);
+
+  & .questionLetter {
+      transition: 0.3s;
+      background: rgb(76, 157, 220);
+      color: white
+  }
+
+}
+ 
+
+.inputSelection:active {
+  transition: 0.2s;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+.btn {
+  margin: auto;
+  transition: 0.3s;
+  background-color:none;
+  background-color: white;
+  border-radius: 4px;
+  outline: none;
+  border:none;
+  color:rgb(225, 102, 114);
+  font-size: 17px;
+  font-weight: 600;
+  padding: 10px 10px 10px 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  box-shadow: $box-shadow;
+  color: white;
+  background: rgb(247, 101, 116);
+}
+
+.btn:active {
+  transition: 0.2s;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
+.buttonContainer {
+  display: flex;
+
+}
+
+.inputDescriptionContainer {
+  margin: -5px 0 10px 8px;
+}
+
+.inputDescriptionText {
+  display: flex;
+  float: right;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.inputRadio {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.question {
+  margin-bottom: 31px;
+  text-align: center;
+}
+
+.appContainer {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.innerAppContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.questionDescription {
+  display: flex;
+  justify-content: space-around;
+  align-self: center;
+  align-content: space-around;
+  align-items: stretch;
+  // text-align: center;
+}
+
+.questionLetter {
+  // display: inline-block;
+  float: left;
+  padding: 10px;
+  background: rgb(212, 237, 252);
+  color: rgb(76, 157, 220);
+  border-radius: 50%;
+
+  margin: 5px;
+  overflow-wrap: break-word;
+  
+  width: 15px;
+  height: 15px;
+  padding: 3px;
+  
+  border: none;
+  
+  text-align: center;
+  font: 13px sans-serif;
+  text-align: justify;
+}
+
+.letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // margin-bottom: 30px;
+}
+
+.selectionTextContainer {
+  display: inline;
+  justify-content: flex-end;
+  // margin-left: 10px;
+}
