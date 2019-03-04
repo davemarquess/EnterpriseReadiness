@@ -1,100 +1,82 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../../styles.scss';
+import Questions from './Questions.jsx';
 
 import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { ApolloProvider, Query } from "react-apollo";
 import gql from "graphql-tag";
 
+const cache = new InMemoryCache();
+
 const client = new ApolloClient({
-  // uri: "https://48p1r2roz4.sse.codesandbox.io",
   uri: 'https://assessment.staging.enterprisegrade.io/graphql',
-  cache: new InMemoryCache()
+  cache
 });
 
-const inputId = '-Yk_lHR89cTSRLQ9mehOnsth-OnIFNWn'
 
-const Questions = () => (
-  <Query
-    // query={gql`
-    //   {
-    //     rates(currency: "USD") {
-    //       currency
-    //       rate
-    //     }
-    //   }
-    // `}
+const MY_QUERY = gql`
+    query {
+      data
+    }`;
 
-    query={gql`
-    {
-      assessment(id: "CWaW4e0HEqvLYHbqcrSBTO5AUwtQGrpm") {
-    id,
-    shortId,
-    isCompleted,
-    questions {
-      id,
-      text,
-      description,
-      question,
-      choices {
-        id,
-        text,
-        recommendation,
-        isSelected
-      }
-    }
-  }
-    }
-  `}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
-      console.log(data.assessment.questions);
-      return data.assessment.questions.map((question, index) => (
-
-        <div key={index} className="questionContainer">
-          <div>{question.text}</div>
-          <div className="formText">
-            {/* <div className="questionDescription">
-              {question.description}
-      </div> */}
-            <p className="question">{question.question}</p>
-
-            <div>
-              {question.choices.map(choice => {
-                return <div className="inputSelection" key={choice.id}>
-                  <input className="inputRadio" type="hidden" value={choice.id} />
-                  <div className="inputDescriptionContainer">
-                    <div className="questionLetter"><span className="letter">{choice.id[choice.id.length - 1].toUpperCase()}</span></div>
-                    <label className="inputDescriptionText">{choice.text}</label>
-                    <div className="selectionTextContainer">
-
-                    </div>
-                  </div>
-                </div>
-              })}
-            </div>
-            <div className="buttonContainer">
-              <button className="btn">Next ></button>
-            </div>
-          </div>
-
-        </div>
-      ));
-    }}
-  </Query>
-);
-
+const CURRENT_QUESTION = gql`
+    query {
+      currentQuestion
+    }`;
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
     }
+    this.handleToggleQuestionSelected = this.handleToggleQuestionSelected.bind(this);
+    this.handleIsQuestionSelected = this.handleIsQuestionSelected.bind(this);
+    this.handleReturnQuestion = this.handleReturnQuestion.bind(this);
   }
 
-  handleSave(event) {
+  componentDidMount() {
+  }
+
+  handleReturnQuestion() {
+    let currentQuestion = client.readQuery({ query: CURRENT_QUESTION }).currentQuestion;
+    cache.writeData({ data: { currentQuestion: currentQuestion + 1 } });
+    // return questionArray[currentQuestion];
+    console.log(client.readQuery({ query: CURRENT_QUESTION }).currentQuestion)
+  }
+
+  handleToggleQuestionSelected() {
+    let isQuestionInStore = false;
+
+    try {
+      const isSelected = client.readQuery({ query: MY_QUERY });
+      console.log('full query: ', isSelected)
+      if (isSelected) {
+        client.writeData({ data: { questionSelected: !isSelected.questionSelected } })
+        isQuestionInStore = true;
+
+      }
+    }
+    catch (error) {
+      // console.log(error);
+    }
+
+    if (!isQuestionInStore) {
+      client.writeData({ data: { questionSelected: true } });
+      // console.log(client.readQuery({ query: MY_QUERY }).questionSelected)
+    }
+  }
+
+  handleIsQuestionSelected() {
+    try {
+      isSelected = client.readQuery({ query: MY_QUERY }).questionSelected;
+      if (isSelected) return true;
+      console.log('true')
+    }
+    catch (error) {
+      console.log('false')
+      return false;
+    }
   }
 
   render() {
@@ -102,8 +84,14 @@ class App extends React.Component {
       <div className="appContainer">
         <div className="innerAppContainer">
           <ApolloProvider client={client}>
-
-            <Questions />
+            <Questions
+              MY_QUERY={MY_QUERY}
+              client={client}
+              cache={cache}
+              handleReturnQuestion={this.handleReturnQuestion}
+              handleToggleQuestionSelected={this.handleToggleQuestionSelected}
+              handleIsQuestionSelected={this.handleIsQuestionSelected}
+            />
           </ApolloProvider>
         </div>
       </div>

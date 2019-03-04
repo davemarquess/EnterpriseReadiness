@@ -17,20 +17,22 @@ $error-color: rgb(237, 84, 84);
 #root {
   margin: auto;
 }
+
 .questionContainer {
   display: flex;
   justify-content: center;
   background-color: $background-color;
-  padding: 20px 20px 30px 20px;
-  margin: 30px 20px 20px 20px;
+  padding: 68px 3px 50px 3px;
+  margin: 30px 20px 30px 20px;
   font-family: sans-serif;
-  width: 41%;
+  width: 610px;
+  height: 495px;
   border-radius: 6px;
-  border: 1px solid rgb(223, 219, 219);
+  border: 4px solid rgb(223, 219, 219);
   animation: whiteCardFadeIn 1s;
   color: $text-black;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 24px;
   flex-wrap: wrap;
 }
 
@@ -44,7 +46,7 @@ $error-color: rgb(237, 84, 84);
 .questionContainer::after {
   /* Add shadow to distinguish sheets from one another */
   // box-shadow: $box-shadow;
-  border: 1px solid rgb(222, 222, 222);
+  border: 1.5px solid rgb(224, 226, 235);
   border-radius: 6px;
 }
 
@@ -54,8 +56,8 @@ $error-color: rgb(237, 84, 84);
   justify-content: center;
   content: "";
   position: absolute;
-  width: 43.2%;
-  height: 69%;
+  width: 42.2%;
+  height: 80.8%;
   background-color: $background-color;
   margin-left: 28.5%;
   margin-top: 39.5px;
@@ -63,14 +65,14 @@ $error-color: rgb(237, 84, 84);
 
 /* Second sheet of paper */
 .questionContainer::before {
-  left: 10px;
-  top: 8px;
+  left: 20.3px;
+  top: 9px;
   z-index: -1;
 }
 
 /* Third sheet of paper */
 .questionContainer::after {
-  left: 20px;
+  left: 30px;
   top: 19px;
   z-index: -2;
 }
@@ -112,15 +114,26 @@ $error-color: rgb(237, 84, 84);
 
 .inputSelection:hover {
   transition: 0.3s;
-  background-color: rgba(195, 242, 255, 0.7);
-  border-color: rgba(148, 184, 194, 0.7);
+  background-color: rgba(212, 240, 249, 0.7);
+  border-color: rgba(148, 184, 194, 0.9);
 
   & .questionLetter {
       transition: 0.3s;
       background: rgb(76, 157, 220);
       color: white
   }
+}
 
+.inputSelectionSelected {
+  transition: 0.3s;
+  background-color: rgba(212, 240, 249, 0.7);
+  border-color: rgba(148, 184, 194, 0.9);
+
+  & .questionLetter {
+      transition: 0.3s;
+      background: rgb(76, 157, 220);
+      color: white
+  }
 }
  
 
@@ -143,6 +156,7 @@ $error-color: rgb(237, 84, 84);
   font-weight: 600;
   padding: 10px 10px 10px 10px;
   cursor: pointer;
+  margin-top: 14px;
 }
 
 .btn:hover {
