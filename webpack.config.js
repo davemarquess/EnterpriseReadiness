@@ -41,7 +41,7 @@ module.exports = {
       "/api": "http://localhost:3000"
     },
     publicPath: '/',
-    setup(app) {
+    before(app) {
       app.post('*', (req, res) => {
         res.redirect(req.originalUrl);
       });
